@@ -2,29 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Market Efficiency Flashcards</title>
+  <title>Market Efficiency - Full Flashcards</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <h1>Market Efficiency Flashcards</h1>
 
-<div class="flashcard">
-  <div class="question">What is Market Efficiency?</div>
-  <button onclick="showAnswer(0)">Show Answer</button>
-  <div class="answer" style="display:none;">Prices fully reflect all available information (Fama, 1970).</div>
+<div class="flashcard" id="flashcard">
+  <div class="question" id="question">Loading question...</div>
+  <button onclick="showAnswer()">Show Answer</button>
+  <div class="answer" id="answer" style="display:none;">Loading answer...</div>
 </div>
 
-<div class="flashcard">
-  <div class="question">What surprising result did Kendall (1953) find?</div>
-  <button onclick="showAnswer(1)">Show Answer</button>
-  <div class="answer" style="display:none;">Stock prices evolved randomly, no predictive patterns.</div>
-</div>
-
-<div class="flashcard">
-  <div class="question">Does unpredictability mean irrationality?</div>
-  <button onclick="showAnswer(2)">Show Answer</button>
-  <div class="answer" style="display:none;">No, random movements are signs of rational markets (Samuelson, 1965).</div>
+<div class="controls">
+  <button onclick="prevCard()">Previous</button>
+  <button onclick="shuffleCards()">Shuffle</button>
+  <button onclick="nextCard()">Next</button>
 </div>
 
 <script src="script.js"></script>
