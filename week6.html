@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Week 1 Flashcards</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Week 1 Flashcards</h1>
+
+<div class="flashcard" id="flashcard">
+  <div class="question" id="question">Loading question...</div>
+  <button onclick="showAnswer()">Show Answer</button>
+  <div class="answer" id="answer" style="display:none;">Loading answer...</div>
+</div>
+
+<div class="controls">
+  <button onclick="prevCard()">Previous</button>
+  <button onclick="shuffleCards()">Shuffle</button>
+  <button onclick="nextCard()">Next</button>
+</div>
+
+<a href="index.html">Back to Home</a>
+
+<script src="script.js"></script>
+<script>
+const flashcards = [
+  {
+    question: "What is market efficiency?",
+    answer: "Prices fully reflect all available information."
+  },
+  {
+    question: "Who first studied randomness in stock prices?",
+    answer: "Kendall (1953)."
+  }
+];
+
+window.flashcards = flashcards; // Attach cards to global window for script.js
+window.onload = displayCard;
+</script>
+
+</body>
+</html>
