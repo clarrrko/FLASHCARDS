@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Week 1 Flashcards</title>
+  <title>ECOM050 - Week 11 Flashcards</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Week 1 Flashcards</h1>
+<h1>ECOM050 - Week 11 Flashcards</h1>
+<p>Topics: Conventional & Advanced Performance Evaluation</p>
 
 <div class="flashcard" id="flashcard">
-  <div class="question" id="question">Loading question...</div>
+  <div class="question" id="question">Loading...</div>
   <button onclick="showAnswer()">Show Answer</button>
-  <div class="answer" id="answer" style="display:none;">Loading answer...</div>
+  <div class="answer" id="answer" style="display:none;">Loading...</div>
 </div>
 
 <div class="controls">
@@ -21,24 +22,97 @@
   <button onclick="nextCard()">Next</button>
 </div>
 
-<a href="index.html">Back to Home</a>
+<a href="index.html">⬅ Back to Home</a>
 
-<script src="script.js"></script>
 <script>
 const flashcards = [
-  {
-    question: "What is market efficiency?",
-    answer: "Prices fully reflect all available information."
-  },
-  {
-    question: "Who first studied randomness in stock prices?",
-    answer: "Kendall (1953)."
-  }
+  // Conventional Performance Evaluation
+  { question: "What is the arithmetic average return?", answer: "Sum of returns over periods divided by number of periods." },
+  { question: "What is the geometric average return?", answer: "The constant return that gives the same total return over the entire period. Also called time-weighted average." },
+  { question: "What is the difference between time-weighted and dollar-weighted returns?", answer: "Time-weighted ignores cash flows; dollar-weighted accounts for cash added/withdrawn." },
+  { question: "What is the internal rate of return (IRR)?", answer: "The return that equates the present value of inflows and outflows — dollar-weighted return." },
+
+  // Risk Adjustment & Performance Measures
+  { question: "What is the Sharpe Ratio?", answer: "Sharpe = (rP − rF) / σP — excess return per unit of total risk." },
+  { question: "What is the Treynor Measure?", answer: "Treynor = (rP − rF) / βP — excess return per unit of systematic risk." },
+  { question: "What is Jensen's Alpha?", answer: "Alpha = rP − [rF + βP(rM − rF)] — actual return minus CAPM-predicted return." },
+  { question: "What is the Information Ratio?", answer: "IR = Alpha / Nonsystematic risk — abnormal return per unit of tracking error." },
+
+  // Example Question
+  { question: "If rP = 35%, rM = 28%, βP = 1.2, σP = 42%, σ(eP) = 18%, rF = 6%, calculate Sharpe Ratio.", answer: "Sharpe = (35% - 6%) / 42% = 0.69" },
+  { question: "Same example: Treynor?", answer: "Treynor = (35% - 6%) / 1.2 = 24.2%" },
+  { question: "Same example: Jensen’s Alpha?", answer: "Alpha = 35% - [6% + 1.2×(28%-6%)] = 2.6%" },
+  { question: "Same example: Information Ratio?", answer: "IR = 2.6% / 18% = 0.144" },
+
+  // Hypothetical Portfolio Measures
+  { question: "What is the M² measure?", answer: "Return of a portfolio adjusted to match the volatility of the benchmark." },
+  { question: "What is the T² measure?", answer: "Return of a portfolio adjusted to match the beta of the benchmark." },
+
+  // M² & T² Calculation
+  { question: "If σP = 20%, σM = 24%, rP = 16%, rM = 14%, rF = 6%, what is M²?", answer: "M² = [1.2×16% - 0.2×6%] - 14% = 4%" },
+  { question: "Same example: what is T² (β = 0.8)?", answer: "T² = [1.25×16% - 0.25×6%] - 14% = 4.5%" },
+
+  // Choosing the Right Measure
+  { question: "When should Sharpe ratio be used?", answer: "When portfolio is the full investment." },
+  { question: "When is Treynor ratio more appropriate?", answer: "When portfolio is part of a larger diversified fund." },
+  { question: "When is Information Ratio useful?", answer: "When comparing active portfolios to a benchmark." },
+
+  // Advanced Evaluation - Style Analysis
+  { question: "What is style analysis?", answer: "A regression-based method to estimate a fund’s exposure to asset class indexes." },
+  { question: "What does R² measure in style analysis?", answer: "Proportion of return variance explained by style." },
+  { question: "What does the regression intercept capture?", answer: "The alpha due to security selection." },
+
+  // Changing Portfolio Composition
+  { question: "Why is changing composition an issue in evaluation?", answer: "Assumes constant risk, but managers may shift beta or volatility over time." },
+  { question: "What is the result of ignoring changing portfolio composition?", answer: "Sharpe ratio may mislead if portfolio strategy changes mid-period." },
+
+  // Market Timing
+  { question: "What is market timing?", answer: "Adjusting exposure to market based on expected performance." },
+  { question: "What is the Treynor-Mazuy timing model?", answer: "rP − rF = a + b(rM − rF) + c(rM − rF)² + eP; c > 0 indicates timing ability." },
+  { question: "What is the Henriksson-Merton timing model?", answer: "rP − rF = a + b(rM − rF) + c(rM − rF)D + eP, where D is 1 when rM − rF > 0." },
+
+  // Performance Attribution
+  { question: "What is performance attribution?", answer: "Breaking performance into contributions from allocation, sector selection, and security selection." },
+  { question: "What is a bogey portfolio?", answer: "A benchmark portfolio constructed using passive strategies to compare manager performance." },
+  { question: "Why is attribution important?", answer: "Helps identify whether outperformance comes from allocation, selection, or sector bets." }
 ];
 
-window.flashcards = flashcards; // Attach cards to global window for script.js
+let currentIndex = 0;
+
+function displayCard() {
+  const questionEl = document.getElementById('question');
+  const answerEl = document.getElementById('answer');
+  questionEl.textContent = flashcards[currentIndex].question;
+  answerEl.textContent = flashcards[currentIndex].answer;
+  answerEl.style.display = "none";
+}
+
+function showAnswer() {
+  document.getElementById('answer').style.display = "block";
+}
+
+function nextCard() {
+  currentIndex = (currentIndex + 1) % flashcards.length;
+  displayCard();
+}
+
+function prevCard() {
+  currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+  displayCard();
+}
+
+function shuffleCards() {
+  for (let i = flashcards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+  }
+  currentIndex = 0;
+  displayCard();
+}
+
 window.onload = displayCard;
 </script>
 
 </body>
 </html>
+

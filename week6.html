@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Week 1 Flashcards</title>
+  <title>ECOM050 - Week 6 Flashcards</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Week 1 Flashcards</h1>
+<h1>ECOM050 - Week 6 Flashcards</h1>
+<p>Topics: CAPM (Capital Asset Pricing Model) and APT (Arbitrage Pricing Theory)</p>
 
 <div class="flashcard" id="flashcard">
-  <div class="question" id="question">Loading question...</div>
+  <div class="question" id="question">Loading...</div>
   <button onclick="showAnswer()">Show Answer</button>
-  <div class="answer" id="answer" style="display:none;">Loading answer...</div>
+  <div class="answer" id="answer" style="display:none;">Loading...</div>
 </div>
 
 <div class="controls">
@@ -21,24 +22,83 @@
   <button onclick="nextCard()">Next</button>
 </div>
 
-<a href="index.html">Back to Home</a>
+<a href="index.html">⬅ Back to Home</a>
 
-<script src="script.js"></script>
 <script>
 const flashcards = [
-  {
-    question: "What is market efficiency?",
-    answer: "Prices fully reflect all available information."
-  },
-  {
-    question: "Who first studied randomness in stock prices?",
-    answer: "Kendall (1953)."
-  }
+  // CAPM Theory
+  { question: "Why is the Markowitz model hard to use in practice?", answer: "Requires huge number of estimates — means, variances, and thousands of covariances." },
+  { question: "What does CAPM aim to solve?", answer: "It simplifies portfolio optimization by relating returns to systematic risk only." },
+  { question: "What does CAPM assume about investors?", answer: "All investors hold the same mean-variance efficient portfolio (the market portfolio)." },
+  { question: "What is the CAPM expected return equation?", answer: "E(r) = rF + β × [E(rM) - rF]" },
+  { question: "What does beta measure in CAPM?", answer: "The stock’s sensitivity to the market portfolio — systematic risk." },
+  { question: "How does CAPM define the Security Market Line (SML)?", answer: "A graph showing the relationship between expected return and beta." },
+  { question: "What does it mean if a stock lies above the SML?", answer: "It's underpriced — offers more return than predicted by CAPM." },
+  { question: "How is Jensen's alpha calculated?", answer: "Alpha = Actual expected return - CAPM predicted return" },
+  { question: "What does a positive alpha mean?", answer: "The asset is underpriced and could offer abnormal returns." },
+
+  // CAPM Application & Limits
+  { question: "Name 3 applications of CAPM.", answer: "1. Estimating cost of capital, 2. Asset valuation, 3. Portfolio performance measurement." },
+  { question: "What's Roll's Critique of CAPM?", answer: "CAPM can't be properly tested unless we observe the true market portfolio, which is impossible." },
+  { question: "What did Fama and French find?", answer: "Size and value factors add explanatory power to beta." },
+
+  // APT - Arbitrage Pricing Theory
+  { question: "How does APT differ from CAPM?", answer: "APT allows for multiple factors driving returns, not just the market portfolio." },
+  { question: "APT Single Factor Model Equation?", answer: "Rit = αi + βiMRMt + εit" },
+  { question: "APT Assumption about residuals?", answer: "Residuals (εit) are uncorrelated across assets." },
+  { question: "Why is αi → 0 in large portfolios?", answer: "Diversification eliminates idiosyncratic risk; any αi ≠ 0 means arbitrage opportunity." },
+  { question: "APT Multifactor Model Equation?", answer: "rit = E(ri) + ΣβikFkt + εit" },
+  { question: "What are Fkt in the multifactor model?", answer: "Shocks to macroeconomic or systematic factors (e.g., GDP, interest rates)." },
+  { question: "How is expected return expressed in APT?", answer: "E(ri) = rF + Σβikλk" },
+  { question: "What is λk in APT?", answer: "Price of risk for the k-th factor (risk premium)." },
+
+  // APT - Factor Examples
+  { question: "What are some macro factors used in APT (Chen, Roll, Ross)?", answer: "IP (Industrial Production), EI (Expected Inflation), UI (Unanticipated Inflation), CG (Corporate-Gov bond spread), GB (Gov bond - T-bill)." },
+  { question: "What are Fama-French factors?", answer: "SMB (Size), HML (Value)" },
+  { question: "Why doesn't APT specify which factors to use?", answer: "APT is flexible — factors are chosen based on empirical significance." },
+
+  // APT vs CAPM
+  { question: "Key difference between CAPM and APT?", answer: "CAPM uses one market factor; APT allows multiple risk factors." },
+  { question: "How are both models similar?", answer: "Both assume no arbitrage and use betas to relate risk to expected return." },
+  { question: "Which model is easier to test empirically?", answer: "APT — because it doesn't rely on an unobservable market portfolio." }
 ];
 
-window.flashcards = flashcards; // Attach cards to global window for script.js
+let currentIndex = 0;
+
+function displayCard() {
+  const questionEl = document.getElementById('question');
+  const answerEl = document.getElementById('answer');
+  questionEl.textContent = flashcards[currentIndex].question;
+  answerEl.textContent = flashcards[currentIndex].answer;
+  answerEl.style.display = "none";
+}
+
+function showAnswer() {
+  document.getElementById('answer').style.display = "block";
+}
+
+function nextCard() {
+  currentIndex = (currentIndex + 1) % flashcards.length;
+  displayCard();
+}
+
+function prevCard() {
+  currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+  displayCard();
+}
+
+function shuffleCards() {
+  for (let i = flashcards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+  }
+  currentIndex = 0;
+  displayCard();
+}
+
 window.onload = displayCard;
 </script>
 
 </body>
 </html>
+

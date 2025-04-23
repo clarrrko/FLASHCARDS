@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Week 1 Flashcards</title>
+  <title>ECOM050 - Week 5 Flashcards</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Week 1 Flashcards</h1>
+<h1>ECOM050 - Week 5 Flashcards</h1>
+<p>Topics: Two Risky Assets, Correlation, Complete Portfolios, Optimal Portfolio</p>
 
 <div class="flashcard" id="flashcard">
-  <div class="question" id="question">Loading question...</div>
+  <div class="question" id="question">Loading...</div>
   <button onclick="showAnswer()">Show Answer</button>
-  <div class="answer" id="answer" style="display:none;">Loading answer...</div>
+  <div class="answer" id="answer" style="display:none;">Loading...</div>
 </div>
 
 <div class="controls">
@@ -21,24 +22,79 @@
   <button onclick="nextCard()">Next</button>
 </div>
 
-<a href="index.html">Back to Home</a>
+<a href="index.html">⬅ Back to Home</a>
 
-<script src="script.js"></script>
 <script>
 const flashcards = [
-  {
-    question: "What is market efficiency?",
-    answer: "Prices fully reflect all available information."
-  },
-  {
-    question: "Who first studied randomness in stock prices?",
-    answer: "Kendall (1953)."
-  }
+  // Week 5 Part 1 — Two Risky Assets
+  { question: "What are the 3 layers in the top-down portfolio approach?", answer: "1. Capital allocation (risky vs risk-free), 2. Asset allocation within risky, 3. Security selection" },
+  { question: "What is specific risk?", answer: "Risk tied to firm-specific factors; also called diversifiable or non-systematic risk." },
+  { question: "What is market risk?", answer: "Risk affecting all securities, e.g., inflation, recessions. It is non-diversifiable/systematic." },
+  { question: "What happens when correlation ρ = +1 between assets?", answer: "No diversification benefit — portfolio risk equals weighted average of individual risks." },
+  { question: "What happens when ρ = 0?", answer: "No correlation: diversification reduces risk significantly." },
+  { question: "What happens when ρ = -1?", answer: "Perfect negative correlation: portfolio risk can be reduced to zero." },
+  { question: "Portfolio variance for 2 risky assets?", answer: "σ²P = w²Dσ²D + w²Eσ²E + 2wDwEρDEσDσE" },
+  { question: "Perfect positive correlation (ρ = 1): what is σP?", answer: "σP = wDσD + wEσE (no diversification benefit)" },
+  { question: "Perfect negative correlation: weights for σP = 0?", answer: "wD = σE / (σD + σE), wE = σD / (σD + σE)" },
+  { question: "Message from correlation table?", answer: "Lower correlation → higher diversification benefit." },
+
+  // Week 5 Part 2 — Complete Portfolio
+  { question: "Expected return formula with weights wD, wE?", answer: "E(rP) = 0.08wD + 0.13wE" },
+  { question: "Variance formula for ρ = 0.3?", answer: "σ²P = 0.0144w²D + 0.04w²E + 2×0.3×0.12×0.20wDwE" },
+  { question: "Minimum variance portfolio example result?", answer: "wD = 0.82, wE = 0.18, E(rP) = 8.9%, σP = 11.45%" },
+  { question: "Effect of decreasing correlation on risk?", answer: "Lower correlation reduces total portfolio risk." },
+  { question: "What does CAL stand for?", answer: "Capital Allocation Line" },
+  { question: "Sharpe ratio formula?", answer: "Sharpe = (E(rP) - rF) / σP" },
+  { question: "CAL(A) vs CAL(B) comparison?", answer: "CAL(B) dominates A — higher Sharpe ratio." },
+  { question: "What is the optimal risky portfolio P?", answer: "The portfolio on the risky asset frontier that is tangent to the highest possible CAL." },
+  { question: "How to find optimal risky portfolio?", answer: "Maximize Sharpe ratio: max S = (E(rP) - rF)/σP" },
+  { question: "Resulting optimal weights from example?", answer: "wD = 0.4, wE = 0.6" },
+  { question: "E(rP) and σP for optimal portfolio?", answer: "E(rP) = 11%, σP = 14.2%, Sharpe = 0.42" },
+  { question: "What is the 'complete' portfolio?", answer: "Combination of risk-free asset + optimal risky portfolio P." },
+  { question: "What determines the optimal complete portfolio?", answer: "Investor’s degree of risk aversion (utility function)." },
+  { question: "Markowitz Step 1: Frontier?", answer: "Identify minimum variance frontier for risky assets." },
+  { question: "What is the efficient frontier?", answer: "Portfolios above global minimum variance that offer best risk-return tradeoff." },
+  { question: "Markowitz Step 2: Optimal risky portfolio?", answer: "Find portfolio with steepest CAL — highest Sharpe ratio." },
+  { question: "Markowitz Step 3: Optimal complete portfolio?", answer: "Mix of F and P that maximizes utility." },
+  { question: "What is the Separation Property?", answer: "Portfolio choice splits into (1) finding optimal risky portfolio (same for all) and (2) selecting allocation (investor specific)." }
 ];
 
-window.flashcards = flashcards; // Attach cards to global window for script.js
+let currentIndex = 0;
+
+function displayCard() {
+  const questionEl = document.getElementById('question');
+  const answerEl = document.getElementById('answer');
+  questionEl.textContent = flashcards[currentIndex].question;
+  answerEl.textContent = flashcards[currentIndex].answer;
+  answerEl.style.display = "none";
+}
+
+function showAnswer() {
+  document.getElementById('answer').style.display = "block";
+}
+
+function nextCard() {
+  currentIndex = (currentIndex + 1) % flashcards.length;
+  displayCard();
+}
+
+function prevCard() {
+  currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+  displayCard();
+}
+
+function shuffleCards() {
+  for (let i = flashcards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+  }
+  currentIndex = 0;
+  displayCard();
+}
+
 window.onload = displayCard;
 </script>
 
 </body>
 </html>
+

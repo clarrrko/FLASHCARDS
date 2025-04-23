@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Week 1 Flashcards</title>
+  <title>ECOM050 - Week 1 Flashcards</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Week 1 Flashcards</h1>
+<h1>ECOM050 - Week 1 Flashcards</h1>
+<p>Covering: Corporation & NPV, Perpetuities & Annuities, Bonds, Stocks</p>
 
 <div class="flashcard" id="flashcard">
-  <div class="question" id="question">Loading question...</div>
+  <div class="question" id="question">Loading...</div>
   <button onclick="showAnswer()">Show Answer</button>
-  <div class="answer" id="answer" style="display:none;">Loading answer...</div>
+  <div class="answer" id="answer" style="display:none;">Loading...</div>
 </div>
 
 <div class="controls">
@@ -21,22 +22,72 @@
   <button onclick="nextCard()">Next</button>
 </div>
 
-<a href="index.html">Back to Home</a>
+<a href="index.html">⬅ Back to Home</a>
 
-<script src="script.js"></script>
 <script>
 const flashcards = [
-  {
-    question: "What is market efficiency?",
-    answer: "Prices fully reflect all available information."
-  },
-  {
-    question: "Who first studied randomness in stock prices?",
-    answer: "Kendall (1953)."
-  }
+  // CORPORATION & NPV
+  { question: "What is the main financial goal of a corporation?", answer: "Maximize shareholder wealth." },
+  { question: "What does NPV stand for?", answer: "Net Present Value." },
+  { question: "Why is NPV important?", answer: "It measures value creation; a positive NPV adds value." },
+  { question: "How is NPV calculated?", answer: "NPV = Present Value of inflows – Initial investment." },
+  { question: "What does a positive NPV indicate?", answer: "The project creates value and should be accepted." },
+
+  // PERPETUITIES & ANNUITIES
+  { question: "What is a perpetuity?", answer: "A stream of equal cash flows that continues forever." },
+  { question: "What is the formula for the present value of a perpetuity?", answer: "PV = C / r" },
+  { question: "What is an annuity?", answer: "A stream of equal cash flows for a fixed period." },
+  { question: "What’s the formula for the PV of an annuity?", answer: "PV = C × [(1 - 1/(1+r)^t) / r]" },
+  { question: "What is the annuity due adjustment?", answer: "Multiply PV or FV by (1 + r) to shift payments forward one period." },
+
+  // BONDS
+  { question: "What is a bond?", answer: "A loan from an investor to a borrower (usually corporate or government)." },
+  { question: "What is the bond price formula?", answer: "PV of coupons + PV of face value." },
+  { question: "What is the yield to maturity (YTM)?", answer: "The discount rate that makes the bond’s price equal to its present value." },
+  { question: "What happens to bond prices when interest rates rise?", answer: "Bond prices fall." },
+  { question: "What is a zero-coupon bond?", answer: "A bond that pays no coupon, only face value at maturity." },
+
+  // STOCKS
+  { question: "What is a stock?", answer: "A share in the ownership of a company." },
+  { question: "How is the price of a stock determined under DDM?", answer: "P = D / (r - g)" },
+  { question: "What does DDM stand for?", answer: "Dividend Discount Model." },
+  { question: "What is the required return on a stock?", answer: "Return = (Dividend / Price) + Growth rate" },
+  { question: "What does the constant growth DDM assume?", answer: "Dividends grow at a constant rate forever." }
 ];
 
-window.flashcards = flashcards; // Attach cards to global window for script.js
+let currentIndex = 0;
+
+function displayCard() {
+  const questionEl = document.getElementById('question');
+  const answerEl = document.getElementById('answer');
+  questionEl.textContent = flashcards[currentIndex].question;
+  answerEl.textContent = flashcards[currentIndex].answer;
+  answerEl.style.display = "none";
+}
+
+function showAnswer() {
+  document.getElementById('answer').style.display = "block";
+}
+
+function nextCard() {
+  currentIndex = (currentIndex + 1) % flashcards.length;
+  displayCard();
+}
+
+function prevCard() {
+  currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+  displayCard();
+}
+
+function shuffleCards() {
+  for (let i = flashcards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+  }
+  currentIndex = 0;
+  displayCard();
+}
+
 window.onload = displayCard;
 </script>
 

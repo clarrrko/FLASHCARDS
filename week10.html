@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Week 1 Flashcards</title>
+  <title>ECOM050 - Week 10 Flashcards</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Week 1 Flashcards</h1>
+<h1>ECOM050 - Week 10 Flashcards</h1>
+<p>Topics: Behavioural Finance and Technical Analysis</p>
 
 <div class="flashcard" id="flashcard">
-  <div class="question" id="question">Loading question...</div>
+  <div class="question" id="question">Loading...</div>
   <button onclick="showAnswer()">Show Answer</button>
-  <div class="answer" id="answer" style="display:none;">Loading answer...</div>
+  <div class="answer" id="answer" style="display:none;">Loading...</div>
 </div>
 
 <div class="controls">
@@ -21,22 +22,79 @@
   <button onclick="nextCard()">Next</button>
 </div>
 
-<a href="index.html">Back to Home</a>
+<a href="index.html">⬅ Back to Home</a>
 
-<script src="script.js"></script>
 <script>
 const flashcards = [
-  {
-    question: "What is market efficiency?",
-    answer: "Prices fully reflect all available information."
-  },
-  {
-    question: "Who first studied randomness in stock prices?",
-    answer: "Kendall (1953)."
-  }
+  // Behavioural Finance - Foundations
+  { question: "What are the two predictions of the Efficient Market Hypothesis?", answer: "1. Prices reflect all available information. 2. Active trading strategies should not outperform passive strategies." },
+  { question: "What is Behavioural Finance?", answer: "A field studying how psychological biases affect investor decisions and challenge EMH." },
+  { question: "How does behavioural finance differ from conventional finance?", answer: "It assumes investors are not fully rational and arbitrage is limited." },
+
+  // Behavioural Biases and Errors
+  { question: "Name two broad categories of behavioural irrationalities.", answer: "1. Misprocessing of information, 2. Suboptimal decision-making given information." },
+  { question: "What is limited attention in finance?", answer: "Investors may miss or underreact to important information due to time or cognitive constraints." },
+  { question: "What is overconfidence?", answer: "Overestimation of one's forecasting abilities or information accuracy." },
+  { question: "What is conservatism bias?", answer: "Slow adjustment of beliefs in response to new evidence." },
+  { question: "What is representativeness bias?", answer: "Overreliance on small or recent samples to make predictions." },
+  { question: "What is framing in behavioural finance?", answer: "Decisions vary based on how options are presented." },
+  { question: "What is mental accounting?", answer: "Treating money differently depending on its source or intended use." },
+  { question: "What is regret avoidance?", answer: "Avoiding nontraditional decisions to minimize future regret." },
+  { question: "What is 'affect' in investment decisions?", answer: "Choosing emotionally appealing assets, often overpaying and underperforming." },
+
+  // Prospect Theory
+  { question: "What does Prospect Theory suggest about risk?", answer: "Investors are risk-averse for gains, but risk-seeking for losses." },
+
+  // Limits to Arbitrage
+  { question: "Why can't arbitrageurs always correct mispricing?", answer: "Due to risks, transaction costs, and short-selling restrictions." },
+  { question: "What is fundamental risk?", answer: "Risk that a mispriced asset becomes more mispriced before correcting." },
+  { question: "What is model risk?", answer: "The risk that the arbitrageur's valuation model is incorrect." },
+  { question: "What is the Royal Dutch and Shell example used for?", answer: "Illustrates limits to arbitrage due to prolonged pricing deviation." },
+
+  // Technical Analysis
+  { question: "What is technical analysis?", answer: "Trading strategy using past prices and volume to predict future movements." },
+  { question: "Why does technical analysis work under behavioural finance?", answer: "Price patterns may reflect behavioural biases and sentiment." },
+  { question: "What is a moving average?", answer: "The average of past prices over a window, used to identify trends." },
+  { question: "What signals do moving averages generate?", answer: "Bullish: price crosses above moving average; Bearish: crosses below." },
+  { question: "What is relative strength?", answer: "The ratio of a stock’s price to a benchmark index, showing out/underperformance." },
+  { question: "What is breadth in technical analysis?", answer: "The number of stocks advancing vs declining — wider participation strengthens signals." },
+  { question: "What is the Trin statistic?", answer: "Volume declining/decliners ÷ volume advancing/advancers — above 1 is bearish." },
+  { question: "What is the Confidence Index?", answer: "Top-rated bond yields ÷ intermediate-rated bond yields — higher values = bullish." }
 ];
 
-window.flashcards = flashcards; // Attach cards to global window for script.js
+let currentIndex = 0;
+
+function displayCard() {
+  const questionEl = document.getElementById('question');
+  const answerEl = document.getElementById('answer');
+  questionEl.textContent = flashcards[currentIndex].question;
+  answerEl.textContent = flashcards[currentIndex].answer;
+  answerEl.style.display = "none";
+}
+
+function showAnswer() {
+  document.getElementById('answer').style.display = "block";
+}
+
+function nextCard() {
+  currentIndex = (currentIndex + 1) % flashcards.length;
+  displayCard();
+}
+
+function prevCard() {
+  currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+  displayCard();
+}
+
+function shuffleCards() {
+  for (let i = flashcards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+  }
+  currentIndex = 0;
+  displayCard();
+}
+
 window.onload = displayCard;
 </script>
 

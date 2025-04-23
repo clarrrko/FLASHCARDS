@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Week 1 Flashcards</title>
+  <title>ECOM050 - Week 8 Flashcards</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Week 1 Flashcards</h1>
+<h1>ECOM050 - Week 8 Flashcards</h1>
+<p>Topics: Market Efficiency, Return Predictability, Testing CAPM/APT</p>
 
 <div class="flashcard" id="flashcard">
-  <div class="question" id="question">Loading question...</div>
+  <div class="question" id="question">Loading...</div>
   <button onclick="showAnswer()">Show Answer</button>
-  <div class="answer" id="answer" style="display:none;">Loading answer...</div>
+  <div class="answer" id="answer" style="display:none;">Loading...</div>
 </div>
 
 <div class="controls">
@@ -21,24 +22,112 @@
   <button onclick="nextCard()">Next</button>
 </div>
 
-<a href="index.html">Back to Home</a>
+<a href="index.html">⬅ Back to Home</a>
 
-<script src="script.js"></script>
 <script>
 const flashcards = [
-  {
-    question: "What is market efficiency?",
-    answer: "Prices fully reflect all available information."
-  },
-  {
-    question: "Who first studied randomness in stock prices?",
-    answer: "Kendall (1953)."
-  }
+  // Classic Definitions
+  { question: "What is the classic definition of market efficiency (Fama, 1970)?", answer: "A market is efficient if prices fully reflect all available information." },
+  { question: "Why is unpredictability a sign of efficiency?", answer: "Informed investors act on news instantly, so only unpredictable news moves prices." },
+  { question: "What did Kendall (1953) find?", answer: "Stock prices evolve randomly; no predictable patterns in time series." },
+
+  // Market Efficiency Types
+  { question: "What is Weak Form Efficiency?", answer: "Prices reflect all past trading information. Technical analysis can't generate profits." },
+  { question: "What is Semi-Strong Form Efficiency?", answer: "Prices reflect all public info. Fundamental analysis can't generate profits." },
+  { question: "What is Strong Form Efficiency?", answer: "Prices reflect all public and private info. No one can consistently outperform." },
+
+  // Modern Definitions
+  { question: "How does modern EMH differ from classic?", answer: "It incorporates risk-return tradeoffs. Predictability allowed if returns are compensation for risk." },
+  { question: "What are 'abnormal profits'?", answer: "Profits beyond the fair risk compensation. Not possible in efficient markets." },
+
+  // Random Walk Model
+  { question: "What is a Random Walk with Drift?", answer: "pt+1 = µ + pt + εt+1; returns = µ + εt+1; abnormal part is unpredictable." },
+  { question: "What is the implication of the Random Walk?", answer: "Prices incorporate expectations + unpredictable shocks; only abnormal returns are unpredictable." },
+
+  // Testing Efficiency
+  { question: "How is weak-form efficiency tested?", answer: "By checking for return autocorrelation (serial correlation)." },
+  { question: "What is momentum?", answer: "Positive serial correlation — returns continue in same direction short term." },
+  { question: "What is reversal?", answer: "Negative serial correlation — losers rebound, winners fade (long term)." },
+
+  // Anomalies
+  { question: "What are some common return anomalies?", answer: "Size, value, P/E ratio, illiquidity, post-earnings drift." },
+  { question: "Why do anomalies challenge EMH?", answer: "They suggest predictable excess returns, violating efficiency assumptions." },
+
+  // Predictability & Efficiency
+  { question: "Does predictability imply inefficiency?", answer: "Not always — could reflect time-varying risk premia, not mispricing." },
+  { question: "What is a martingale in finance?", answer: "Future expected price = current price. No expected gain, consistent with efficiency." },
+
+  // CAPM Testing
+  { question: "What is the CAPM equation?", answer: "E(ri) = rF + βi(E(rM) - rF)" },
+  { question: "How is beta estimated?", answer: "First-pass time series regression: rit − rFt = αi + βi(rMt − rFt) + eit" },
+  { question: "What is the second-pass regression for CAPM?", answer: "ri − rF = γ0 + γ1βi" },
+  { question: "CAPM holds if...", answer: "γ0 = 0, γ1 = E(rM) - rF" },
+
+  // CAPM + Non-Systematic Risk
+  { question: "What is the extended test for CAPM?", answer: "Add variance of residuals: γ2σ²(ei); CAPM holds if γ2 = 0." },
+
+  // CAPM Empirical Failures
+  { question: "What did early tests find about CAPM?", answer: "γ1 (slope) too flat, γ0 (intercept) too high — didn't match predictions." },
+  { question: "What is Roll’s Critique?", answer: "We can’t test CAPM as we never observe the true market portfolio. Proxy error problem." },
+
+  // Beta Estimation Error
+  { question: "Why is beta estimation problematic?", answer: "Measurement errors bias slope down and intercept up in second-pass regression." },
+
+  // Fama-MacBeth Approach
+  { question: "How do Fama and MacBeth improve CAPM testing?", answer: "Use diversified portfolios to reduce firm-specific risk → better beta estimation." },
+  { question: "What do Fama and MacBeth conclude?", answer: "Returns increase with beta; idiosyncratic risk doesn't explain excess returns." },
+
+  // Human Capital & Cycles
+  { question: "Why is human capital a problem for CAPM?", answer: "It’s a large, non-traded asset not included in market proxies like the S&P500." },
+  { question: "How do cycles affect beta estimation?", answer: "CAPM assumes constant beta, but betas vary with business cycles." },
+
+  // APT Testing - Chen, Roll, Ross
+  { question: "What are the 5 macro factors in the Chen, Roll and Ross APT model?", answer: "1. Industrial Production (IP), 2. Expected Inflation (EI), 3. Unanticipated Inflation (UI), 4. Credit Spread (CG), 5. Term Spread (GB)" },
+  { question: "How is APT estimated (first-pass)?", answer: "Estimate βs with regression on market and macro shocks." },
+  { question: "How is APT estimated (second-pass)?", answer: "Regress excess return on betas of all 5 factors to find risk premia." },
+
+  // Fama-French
+  { question: "What are the Fama-French three factors?", answer: "1. Market (M), 2. Size (SMB), 3. Value (HML)" },
+  { question: "Why do small and high B/M stocks have higher returns?", answer: "They may reflect greater macro risk exposure or distress risk." },
+  { question: "What did Liew & Vassalou find?", answer: "Returns on SMB and HML are correlated with future GDP — macro proxies." }
 ];
 
-window.flashcards = flashcards; // Attach cards to global window for script.js
+let currentIndex = 0;
+
+function displayCard() {
+  const questionEl = document.getElementById('question');
+  const answerEl = document.getElementById('answer');
+  questionEl.textContent = flashcards[currentIndex].question;
+  answerEl.textContent = flashcards[currentIndex].answer;
+  answerEl.style.display = "none";
+}
+
+function showAnswer() {
+  document.getElementById('answer').style.display = "block";
+}
+
+function nextCard() {
+  currentIndex = (currentIndex + 1) % flashcards.length;
+  displayCard();
+}
+
+function prevCard() {
+  currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+  displayCard();
+}
+
+function shuffleCards() {
+  for (let i = flashcards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+  }
+  currentIndex = 0;
+  displayCard();
+}
+
 window.onload = displayCard;
 </script>
 
 </body>
 </html>
+
